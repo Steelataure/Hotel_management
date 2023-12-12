@@ -1,3 +1,4 @@
+package src;
 class Repas{
     private int prix;
     private int quantite;
