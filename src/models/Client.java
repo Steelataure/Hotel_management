@@ -1,4 +1,8 @@
-public class Client {
+package models;
+
+import java.io.Serializable;
+
+public class Client implements Serializable {
     private int clientID;
     private String nom;
     private String prenom;
@@ -8,7 +12,7 @@ public class Client {
         this.nom = nom;
         this.prenom = prenom;
     }
-    
+
     public int getClientID() {
         return this.clientID;
     }
@@ -16,4 +20,9 @@ public class Client {
     public String getContact() {
         return this.nom + " " + this.prenom;
     }
+
+    public String getNom() {
+        return this.nom;
+    }
+
 }

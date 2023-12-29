@@ -1,5 +1,6 @@
-package src;
-class Repas{
+package models;
+
+public class Repas{
     private int prix;
     private int quantite;
     private String type;
