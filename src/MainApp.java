@@ -1,19 +1,19 @@
-
-
 import java.util.Scanner;  // Importez la classe Scanner
 import models.Client;      // Importez la classe Client
+import models.Chambre;     // Importez la classe Chambre
 import services.GestionHotel;  // Importez la classe GestionHotel
 import services.ReservationException;  // Importez la classe ReservationException
 import utils.Menu;         // Importez la classe Menu
-import models.Chambre;  
-
 
 public class MainApp {
     public static void main(String[] args) {
         GestionHotel gestionHotel = new GestionHotel();
-
+        
+        // Ajout de quelques chambres
         gestionHotel.ajouterChambre(new Chambre(1, "Simple", 50.0));
-        gestionHotel.ajouterChambre(new Chambre(2, "Double", 80.0));
+        gestionHotel.ajouterChambre(new Chambre(2, "Simple", 50.0));
+        gestionHotel.ajouterChambre(new Chambre(3, "Double", 80.0));
+        gestionHotel.ajouterChambre(new Chambre(4, "Double", 80.0));
 
         int choix;
         Scanner scanner = new Scanner(System.in);
@@ -34,7 +34,7 @@ public class MainApp {
                     System.out.print("Entrez le type de chambre (Simple/Double) : ");
                     String typeChambre = scanner.next();
                     
-                    Client client = new Client(choix, nomClient, nomClient);  // Utilisez le bon constructeur
+                    Client client = new Client(0, nomClient, nomClient);  // Utilisez le bon constructeur
                     Chambre chambreReservee = gestionHotel.chercherChambreDisponible(typeChambre);
                     
                     if (chambreReservee != null) {
@@ -47,6 +47,11 @@ public class MainApp {
                     } else {
                         System.out.println("Aucune chambre disponible de ce type.");
                     }
+                    break;
+                case 3:  // Nouvelle option pour afficher les réservations
+                    System.out.println("Liste des réservations :");
+                    // Assurez-vous d'avoir une méthode pour afficher les réservations dans GestionHotel
+                    // gestionHotel.afficherListeReservations(); 
                     break;
                 case 0:
                     System.out.println("Merci d'avoir utilisé notre application. Au revoir !");
