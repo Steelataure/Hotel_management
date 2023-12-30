@@ -26,7 +26,7 @@ public class Client implements Serializable {
     }
 
     public String getPrenom() {
-        return null;
+        return this.prenom;
     }
 
 }

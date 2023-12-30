@@ -1,15 +1,23 @@
-import java.util.Scanner;  // Importez la classe Scanner
-import models.Client;      // Importez la classe Client
-import models.Chambre;     // Importez la classe Chambre
-import services.GestionHotel;  // Importez la classe GestionHotel
-import services.ReservationException;  // Importez la classe ReservationException
-import utils.Menu;         // Importez la classe Menu
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import models.Client;
+import models.Chambre;
+import models.Reservation;
+import services.GestionHotel;
+import services.ReservationException;
+import services.FichierUtils;
+import utils.Menu;
 
 public class MainApp {
+    // private static final String FICHIER_RESERVATIONS = "./data/reservations.txt";
+
     public static void main(String[] args) {
-        GestionHotel gestionHotel = new GestionHotel();
-        
-        // Ajout de quelques chambres
+        // List<Reservation> reservations = FichierUtils.chargerReservations(FICHIER_RESERVATIONS);
+        // GestionHotel gestionHotel = new GestionHotel(reservations);
+
+        GestionHotel gestionHotel = new GestionHotel(new ArrayList<>());
+
         gestionHotel.ajouterChambre(new Chambre(1, "Simple", 50.0));
         gestionHotel.ajouterChambre(new Chambre(2, "Simple", 50.0));
         gestionHotel.ajouterChambre(new Chambre(3, "Double", 80.0));
@@ -34,13 +42,16 @@ public class MainApp {
                     System.out.print("Entrez le type de chambre (Simple/Double) : ");
                     String typeChambre = scanner.next();
                     
-                    Client client = new Client(0, nomClient, nomClient);  // Utilisez le bon constructeur
+                    Client client = new Client(1, nomClient, nomClient);
                     Chambre chambreReservee = gestionHotel.chercherChambreDisponible(typeChambre);
-                    
+                    System.out.println(client);
+                    System.out.println(chambreReservee);
+
                     if (chambreReservee != null) {
                         try {
                             gestionHotel.effectuerReservation(client, chambreReservee);
                             System.out.println("Réservation effectuée avec succès pour " + nomClient);
+                            // FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), FICHIER_RESERVATIONS);
                         } catch (ReservationException e) {
                             System.out.println("Erreur lors de la réservation : " + e.getMessage());
                         }
@@ -48,10 +59,9 @@ public class MainApp {
                         System.out.println("Aucune chambre disponible de ce type.");
                     }
                     break;
-                case 3:  // Nouvelle option pour afficher les réservations
+                case 3:
                     System.out.println("Liste des réservations :");
-                    // Assurez-vous d'avoir une méthode pour afficher les réservations dans GestionHotel
-                    // gestionHotel.afficherListeReservations(); 
+                    gestionHotel.afficherListeReservations();
                     break;
                 case 0:
                     System.out.println("Merci d'avoir utilisé notre application. Au revoir !");

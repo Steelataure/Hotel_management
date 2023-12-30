@@ -13,6 +13,10 @@ public class GestionHotel {
     private List<Chambre> chambres = new ArrayList<>();
     private List<Reservation> reservations = new ArrayList<>();
 
+    public GestionHotel(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
     // Ajouter une chambre
     public void ajouterChambre(Chambre chambre) {
         chambres.add(chambre);
@@ -31,16 +35,30 @@ public class GestionHotel {
             }
         }
     }
-
-    // Effectuer une réservation
+    
     public void effectuerReservation(Client client, Chambre chambre) throws ReservationException {
+
+        System.out.println("Début de la réservation pour le client : " + client.getNom());
+        
+        if (chambre == null) {
+            System.out.println("La chambre est null.");
+            throw new IllegalArgumentException("La chambre ne peut pas être null.");
+        }
+        
         if (!chambre.estDisponible()) {
+            System.out.println("La chambre n'est pas disponible.");
             throw new ReservationException("La chambre est déjà réservée.");
         }
+        
+        System.out.println("Création de la réservation...");
+        
         Reservation reservation = new Reservation(client, chambre, null, null);
         reservations.add(reservation);
         chambre.setEstDisponible(false);
+        
+        System.out.println("Réservation effectuée avec succès pour le client : " + client.getNom());
     }
+
 
     // Modifier une réservation
     public void modifierReservation(Reservation ancienneReservation, Reservation nouvelleReservation) {
@@ -87,7 +105,6 @@ public class GestionHotel {
         return null;
     }
 
-    
     // Afficher la liste des réservations
     public void afficherListeReservations() {
         if (reservations.isEmpty()) {
@@ -98,5 +115,9 @@ public class GestionHotel {
                 System.out.println(reservation.toString());
             }
         }
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 }
