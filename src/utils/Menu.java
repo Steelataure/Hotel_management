@@ -9,7 +9,7 @@ public class Menu {
         System.out.println("1. Afficher les détails des chambres.");
         System.out.println("2. Réserver une chambre.");
         System.out.println("4. Commander un repas");
-        System.out.println("0. Quitter.");
+        System.out.println("0. Quitter");
         System.out.println("----------------------------------------------------");
 
     }

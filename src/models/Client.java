@@ -19,7 +19,6 @@ public class Client implements Serializable {
         this.repasCommandes = new ArrayList<>();    // Initialisation de la liste des repas
     }
 
-    // Getters et Setters
     public int getClientID() {
         return clientID;
     }

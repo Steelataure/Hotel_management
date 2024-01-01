@@ -45,7 +45,7 @@ public class GestionHotel {
     
     public void effectuerReservation(Client client, Chambre chambre) throws ReservationException {
 
-        System.out.println("Début de la réservation pour le client : " + client.getNom());
+        System.out.println("Début de la réservation pour le client : " + client.getNom() + client.getPrenom());
         
         if (chambre == null) {
             System.out.println("La chambre est null.");
@@ -63,7 +63,7 @@ public class GestionHotel {
         reservations.add(reservation);
         chambre.setEstDisponible(false);
         
-        System.out.println("Réservation effectuée avec succès pour le client : " + client.getNom());
+        System.out.println("Réservation effectuée avec succès pour le client : " + client.getNom() + client.getPrenom());
     }
 
 

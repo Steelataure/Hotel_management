@@ -19,10 +19,10 @@ public class MainApp {
 
         GestionHotel gestionHotel = new GestionHotel(new ArrayList<>());
 
-        gestionHotel.ajouterChambre(new Chambre(1, "Chambre Simple", 50));
-        gestionHotel.ajouterChambre(new Chambre(2, "Chambre Simple", 50));
-        gestionHotel.ajouterChambre(new Chambre(3, "Chambre Double", 80));
-        gestionHotel.ajouterChambre(new Chambre(4, "Chambre Double", 80 ));
+        gestionHotel.ajouterChambre(new Chambre(1, "Simple", 50));
+        gestionHotel.ajouterChambre(new Chambre(1, "Simple", 50));
+        gestionHotel.ajouterChambre(new Chambre(1, "Double", 80));
+        gestionHotel.ajouterChambre(new Chambre(1, "Double", 80 ));
 
         gestionHotel.ajouterRepas(new Repas(9, 1,"Petit-déjeuner Continental : Croissants, pain frais, confiture, beurre, café, thé, et jus d'orange.",1));
         gestionHotel.ajouterRepas(new Repas(12,1,"Petit Déjeuner Américain : oeufs brouillés, bacon, saucisses, pancakes au sirop d'érable, café, et jus de fruits.",2));
@@ -67,7 +67,7 @@ public class MainApp {
                 if (chambreReservee != null) {
                     try {
                         gestionHotel.effectuerReservation(client, chambreReservee);
-                        System.out.println("Réservation effectuée avec succès pour " + nomClient);
+                        System.out.println("Réservation effectuée avec succès pour " + nomClient + prenomClient);
                         // FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), FICHIER_RESERVATIONS);
                     } catch (ReservationException e) {
                         System.out.println("Erreur lors de la réservation : " + e.getMessage());
