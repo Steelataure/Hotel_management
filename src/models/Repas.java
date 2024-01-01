@@ -1,25 +1,49 @@
 package models;
 
-public class Repas{
+import java.io.Serializable;
+
+public class Repas implements Serializable {
     private int prix;
     private int quantite;
     private String type;
+    private int numero;
+    private boolean estDisponible;
 
-    Repas(int prix, int quantite, String type) {
+    public Repas(int prix, int quantite, String type, int numero) {
         this.prix = prix;
         this.quantite = quantite;
         this.type = type;
+        this.numero = numero;
+        this.estDisponible = true; // Par défaut, un repas est disponible
     }
 
-    int getPrix() {
+    public int getPrix() {
         return this.prix;
     }
 
-    int getQuantite() {
+    public int getQuantite() {
         return this.quantite;
     }
 
-    String getType() {
+    public String getType() {
         return this.type;
-    }  
+    }
+
+    public int getNumero() {
+        return this.numero;
+    }
+
+    public boolean estDisponible() {
+        return this.estDisponible;
+    }
+
+    public void setEstDisponible(boolean estDisponible) {
+        this.estDisponible = estDisponible;
+    }
+
+    @Override
+    public String toString() {
+        return numero + " " + type + " " + prix + " euros";
+    }
+    
 }

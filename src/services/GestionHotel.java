@@ -12,6 +12,8 @@ public class GestionHotel {
     private List<Client> clients = new ArrayList<>();
     private List<Chambre> chambres = new ArrayList<>();
     private List<Reservation> reservations = new ArrayList<>();
+    private List<Repas> repasDisponibles = new ArrayList<>();
+
 
     public GestionHotel(List<Reservation> reservations) {
         this.reservations = reservations;
@@ -35,6 +37,11 @@ public class GestionHotel {
             }
         }
     }
+
+    public void ajouterRepas(Repas repas) {
+        repasDisponibles.add(repas);
+    }
+
     
     public void effectuerReservation(Client client, Chambre chambre) throws ReservationException {
 
@@ -78,6 +85,18 @@ public class GestionHotel {
         System.out.println("Repas commandé pour " + client.getNom());
         // Implémentation de la commande de repas
     }
+
+    public void afficherRepasDisponibles() {
+        if (repasDisponibles.isEmpty()) {
+            System.out.println("Aucun repas disponible pour le moment.");
+        } else {
+            for (Repas repas : repasDisponibles) {
+                System.out.println(repas); 
+            }
+        }
+    }
+    
+
 
     // Enregistrer la facture pour un client
     public void enregistrerFacture(Client client) {

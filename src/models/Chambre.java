@@ -5,10 +5,10 @@ import java.io.Serializable;
 public class Chambre implements Serializable {
     private int numero;
     private String type;
-    private double prix;
+    private int prix;
     private boolean estDisponible;
 
-    public Chambre(int numero, String type, double prix) {
+    public Chambre(int numero, String type, int prix) {
         this.numero = numero;
         this.type = type;
         this.prix = prix;
@@ -23,7 +23,7 @@ public class Chambre implements Serializable {
         return type;
     }
 
-    public double getPrix() {
+    public int getPrix() {
         return prix;
     }
 
@@ -37,11 +37,6 @@ public class Chambre implements Serializable {
 
     @Override
     public String toString() {
-        return "Chambre{" +
-                "numero=" + numero +
-                ", type='" + type + '\'' +
-                ", prix=" + prix +
-                ", estDisponible=" + estDisponible +
-                '}';
+        return numero + " " + type + " " + prix + " euros";
     }
 }
