@@ -31,12 +31,19 @@ public class Chambre implements Serializable {
         return estDisponible;
     }
 
+    public String afficherDisponible(boolean estDisponible) {
+        if (estDisponible == true) {
+            return "Disponible";
+        } else {
+            return "Indisponible";
+        }
+    }
     public void setEstDisponible(boolean estDisponible) {
         this.estDisponible = estDisponible;
     }
 
     @Override
     public String toString() {
-        return numero + " " + type + " " + prix + " euros [" + estDisponible + "]";
+        return numero + " " + type + " " + prix + " euros [" + afficherDisponible(estDisponible) + "]";
     }
 }
