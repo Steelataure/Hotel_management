@@ -84,7 +84,7 @@ public class MainApp {
                 case 4: 
                     System.out.println("Choisissez un repas :");
                     gestionHotel.afficherRepasDisponibles();
-                    int choixRepas = scanner.nextInt();
+                    int choixRepas  = scanner.nextInt();
 
                 case 0:
                     System.out.println("Merci d'avoir utilisé notre application. Au revoir !");
