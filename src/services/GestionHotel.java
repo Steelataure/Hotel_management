@@ -32,10 +32,8 @@ public class GestionHotel {
     // Afficher les chambres disponibles
     public void afficherChambresDisponibles() {
         for (Chambre chambre : chambres) {
-            if (chambre.estDisponible()) {
-                System.out.println(chambre.toString());
+            System.out.println(chambre.toString());
             }
-        }
     }
 
     public void ajouterRepas(Repas repas) {

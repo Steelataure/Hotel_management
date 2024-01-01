@@ -37,6 +37,6 @@ public class Chambre implements Serializable {
 
     @Override
     public String toString() {
-        return numero + " " + type + " " + prix + " euros";
+        return numero + " " + type + " " + prix + " euros [" + estDisponible + "]";
     }
 }

@@ -40,7 +40,7 @@ public class MainApp {
 
             switch (choix) {
                 case 1:
-                    System.out.println("Liste des chambres disponibles :");
+                    System.out.println("Liste des chambres :");
                     gestionHotel.afficherChambresDisponibles();
                     break;
                 case 2:
@@ -67,8 +67,8 @@ public class MainApp {
                 if (chambreReservee != null) {
                     try {
                         gestionHotel.effectuerReservation(client, chambreReservee);
-                        System.out.println("Réservation effectuée avec succès pour " + nomClient + prenomClient);
-                        // FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), FICHIER_RESERVATIONS);
+                        System.out.println("Réservation effectuée avec succès pour " + nomClient + " " + prenomClient);
+                        // FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), FICHIER_RESERtranquiVATIONS);
                     } catch (ReservationException e) {
                         System.out.println("Erreur lors de la réservation : " + e.getMessage());
                     }
