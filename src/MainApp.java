@@ -33,9 +33,11 @@ public class MainApp {
         gestionHotel.ajouterRepas(new Repas(4, null, 20, "Repas traditionnel: Tajines kefta."));
         gestionHotel.ajouterRepas(new Repas(5, null, 25, "Gastronomique :  foie gras, sole meunière et crème brûlée."));
         gestionHotel.ajouterRepas(new Repas(6, null, 22, "Dîner Asiatique : Chicken Katsu accompagné de riz et de curry ainsi que son saké."));
+
         String nomClient = null;
         String prenomClient = null;
         Client client = null;
+
 
         int choix;
         Scanner scanner = new Scanner(System.in);
@@ -50,35 +52,36 @@ public class MainApp {
                     gestionHotel.afficherChambresDisponibles();
                     break;
                 case 2:
-                System.out.println("Effectuer une réservation :");
+                    System.out.println("Effectuer une réservation :");
 
-                System.out.print("Entrez le nom du client : ");
-                nomClient = scanner.next();
-                System.out.print("Entrez le prénom du client : ");
-                prenomClient = scanner.next();
-                client = new Client((int)(Math.random() * 10000), nomClient, prenomClient);
+                    System.out.print("Entrez le nom du client : ");
+                    nomClient = scanner.next();
+                    System.out.print("Entrez le prénom du client : ");
+                    prenomClient = scanner.next();
+                    client = new Client((int)(Math.random() * 10000), nomClient, prenomClient);
 
-                System.out.print("Entrez le type de chambre (Simple/Double) : ");
-                String typeChambre = scanner.next().toLowerCase();
+                    System.out.print("Entrez le type de chambre (Simple/Double) : ");
+                    String typeChambre = scanner.next().toLowerCase();
 
-                Chambre chambreReservee = gestionHotel.chercherChambreDisponible(typeChambre);
-                // Affichez les informations du client et de la chambre réservée
-                System.out.println(client);
-                System.out.println(chambreReservee);
+                    Chambre chambreReservee = gestionHotel.chercherChambreDisponible(typeChambre);
+                    // Affichez les informations du client et de la chambre réservée
+                    System.out.println(client);
+                    System.out.println(chambreReservee);
 
-                
-                if (chambreReservee != null) {
-                    try {
-                        gestionHotel.effectuerReservation(client, chambreReservee);
-                        System.out.println("Réservation effectuée avec succès pour " + nomClient + " " + prenomClient);
-                        // FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), FICHIER_RESERtranquiVATIONS);
-                    } catch (ReservationException e) {
-                        System.out.println("Erreur lors de la réservation : " + e.getMessage());
+                    
+                    if (chambreReservee != null) {
+                        try {
+                            gestionHotel.effectuerReservation(client, chambreReservee);
+                            System.out.println("Réservation effectuée avec succès pour " + nomClient + " " + prenomClient);
+                            // FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), FICHIER_RESERtranquiVATIONS);
+                        } catch (ReservationException e) {
+                            System.out.println("Erreur lors de la réservation : " + e.getMessage());
+                        }
+                    } else {
+                        System.out.println("Aucune chambre disponible de ce type.");
                     }
-                } else {
-                    System.out.println("Aucune chambre disponible de ce type.");
-                }
-                break;
+                    FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), "C:\\Users\\alexa\\OneDrive\\Bureau\\Hotel_management\\src\\data\\reservations.txt");
+                    break;
 
                 case 3:
                     System.out.println("Liste des réservations :");
@@ -87,29 +90,28 @@ public class MainApp {
 
 
                 case 4:
-                System.out.println("Liste des repas disponibles :");
-                gestionHotel.afficherRepasDisponibles();
-                System.out.print("Choisissez un repas (entrez le numéro) : ");
-                int choixRepas = scanner.nextInt();
+                    System.out.println("Liste des repas disponibles :");
+                    gestionHotel.afficherRepasDisponibles();
+                    System.out.print("Choisissez un repas (entrez le numéro) : ");
+                    int choixRepas = scanner.nextInt();
+                    
+                    System.out.print("Entrez le nom du client : ");
+                    nomClient = scanner.next();
+                    System.out.print("Entrez le prénom du client : ");
+                    prenomClient = scanner.next();
+                    client = new Client((int)(Math.random() * 10000), nomClient, prenomClient);
                 
-                System.out.print("Entrez le nom du client : ");
-                nomClient = scanner.next();
-                System.out.print("Entrez le prénom du client : ");
-                prenomClient = scanner.next();
-                client = new Client((int)(Math.random() * 10000), nomClient, prenomClient);
-            
-                // Récupérer le repas choisi
-                Repas repasChoisi = gestionHotel.getRepasByNumero(choixRepas);  // Suppose que vous avez une méthode pour récupérer un repas par numéro.
-                
-                if (repasChoisi != null) {
-                    gestionHotel.commanderRepas(client, repasChoisi);  // Utiliser l'objet Client initialisé
-                    System.out.println("Repas commandé avec succès !");
-                } else {
-                    System.out.println("Repas non trouvé.");
-                }
-                break;
-            
-
+                    // Récupérer le repas choisi
+                    Repas repasChoisi = gestionHotel.getRepasByNumero(choixRepas);  // Suppose que vous avez une méthode pour récupérer un repas par numéro.
+                    
+                    if (repasChoisi != null) {
+                        gestionHotel.commanderRepas(client, repasChoisi);  // Utiliser l'objet Client initialisé
+                        System.out.println("Repas commandé avec succès !");
+                    } else {
+                        System.out.println("Repas non trouvé.");
+                    }
+                    break;
+        
                 case 5:
                     
 
@@ -123,5 +125,6 @@ public class MainApp {
         } while (choix != 0);
         
         scanner.close();
+
     }
 }

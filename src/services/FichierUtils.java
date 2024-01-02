@@ -7,7 +7,7 @@ import models.Reservation;
 public class FichierUtils {
 
     // Chemin par défaut pour sauvegarder le fichier
-    private static final String CHEMIN_PAR_DEFAUT = "../data/reservations.txt";
+    private static final String CHEMIN_PAR_DEFAUT = "C:\\Users\\alexa\\OneDrive\\Bureau\\Hotel_management\\src\\data\\reservations.txt";
 
     // Sauvegarder les réservations dans un fichier
     public static void sauvegarderReservations(List<Reservation> reservations, String nomFichier) {
@@ -16,8 +16,10 @@ public class FichierUtils {
             System.out.println("Les réservations ont été sauvegardées avec succès !");
         } catch (IOException e) {
             System.err.println("Erreur lors de la sauvegarde des réservations : " + e.getMessage());
+            e.printStackTrace(); // Ceci affichera la trace complète de l'erreur
         }
     }
+    
 
     // Charger les réservations depuis un fichier
     @SuppressWarnings("unchecked")
