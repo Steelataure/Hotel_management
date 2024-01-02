@@ -1,49 +1,24 @@
 package models;
 
-import java.io.Serializable;
+public class Repas extends Hebergement {
 
-public class Repas implements Serializable {
-    private int prix;
-    private int quantite;
-    private String type;
-    private int numero;
-    private boolean estDisponible;
+    private String description;
 
-    public Repas(int prix, int quantite, String type, int numero) {
-        this.prix = prix;
-        this.quantite = quantite;
-        this.type = type;
-        this.numero = numero;
-        this.estDisponible = true; // Par défaut, un repas est disponible
+    public Repas(int numero, String type, int prix, String description) {
+        super(numero, type, prix);
+        this.description = description;
     }
 
-    public int getPrix() {
-        return this.prix;
+    public String getDescription() {
+        return description;
     }
 
-    public int getQuantite() {
-        return this.quantite;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public int getNumero() {
-        return this.numero;
-    }
-
-    public boolean estDisponible() {
-        return this.estDisponible;
-    }
-
-    public void setEstDisponible(boolean estDisponible) {
-        this.estDisponible = estDisponible;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return numero + " " + type + " " + prix + " euros";
+        return getNumero() + " " + getDescription() + " " + getPrix() + " euros";
     }
-    
 }

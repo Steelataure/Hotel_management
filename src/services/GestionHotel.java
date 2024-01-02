@@ -50,7 +50,7 @@ public class GestionHotel {
             throw new IllegalArgumentException("La chambre ne peut pas être null.");
         }
         
-        if (!chambre.estDisponible()) {
+        if (!chambre.isEstDisponible()) {
             System.out.println("La chambre n'est pas disponible.");
             throw new ReservationException("La chambre est déjà réservée.");
         }
@@ -80,16 +80,17 @@ public class GestionHotel {
 
     // Commander un repas pour un client
     public void commanderRepas(Client client, Repas repas) {
-        System.out.println("Repas commandé pour " + client.getNom());
-        // Implémentation de la commande de repas
+        System.out.println("Commande de repas pour " + client.getNom() + " : " + repas.getDescription());
+        // Ici, vous pouvez ajouter d'autres fonctionnalités, comme la création d'une facture pour le repas.
     }
 
     public void afficherRepasDisponibles() {
         if (repasDisponibles.isEmpty()) {
             System.out.println("Aucun repas disponible pour le moment.");
         } else {
+            System.out.println("Repas disponibles :");
             for (Repas repas : repasDisponibles) {
-                System.out.println(repas); 
+                System.out.println(repas.toString()); 
             }
         }
     }
@@ -105,7 +106,7 @@ public class GestionHotel {
     // Chercher une chambre disponible par type
     public Chambre chercherChambreDisponible(String typeChambre) {
         for (Chambre chambre : chambres) {
-            if (chambre.estDisponible() && chambre.getType().equalsIgnoreCase(typeChambre)) {
+            if (chambre.isEstDisponible() && chambre.getType().equalsIgnoreCase(typeChambre)) {
                 return chambre;
             }
         }
@@ -136,5 +137,9 @@ public class GestionHotel {
 
     public List<Reservation> getReservations() {
         return reservations;
+    }
+
+    public Repas getRepasByNumero(int choixRepas) {
+        return null;
     }
 }

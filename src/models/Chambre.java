@@ -1,34 +1,20 @@
 package models;
 
-import java.io.Serializable;
+public class Chambre extends Hebergement {
 
-public class Chambre implements Serializable {
-    private int numero;
-    private String type;
-    private int prix;
-    private boolean estDisponible;
+    private int capacite;
 
-    public Chambre(int numero, String type, int prix) {
-        this.numero = numero;
-        this.type = type;
-        this.prix = prix;
-        this.estDisponible = true;  // Par défaut, une chambre est disponible
+    public Chambre(int numero, String type, int prix, int capacite) {
+        super(numero, type, prix);
+        this.capacite = capacite;
     }
 
-    public int getNumero() {
-        return numero;
+    public int getCapacite() {
+        return capacite;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public int getPrix() {
-        return prix;
-    }
-
-    public boolean estDisponible() {
-        return estDisponible;
+    public void setCapacite(int capacite) {
+        this.capacite = capacite;
     }
 
     public String afficherDisponible(boolean estDisponible) {
@@ -38,12 +24,10 @@ public class Chambre implements Serializable {
             return "Indisponible";
         }
     }
-    public void setEstDisponible(boolean estDisponible) {
-        this.estDisponible = estDisponible;
-    }
+
 
     @Override
     public String toString() {
-        return numero + " " + type + " " + prix + " euros [" + afficherDisponible(estDisponible) + "]";
+        return getNumero() + " " + getType() + " " + " " + getCapacite() + "place(s) " + getPrix() + " euros [" + afficherDisponible(estDisponible) + "]";
     }
 }

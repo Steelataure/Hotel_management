@@ -4,6 +4,7 @@ import java.util.List;
 import models.Client;
 import models.Repas;
 import models.Chambre;
+import models.Facture;
 import models.Reservation;
 import services.GestionHotel;
 import services.ReservationException;
@@ -19,17 +20,22 @@ public class MainApp {
 
         GestionHotel gestionHotel = new GestionHotel(new ArrayList<>());
 
-        gestionHotel.ajouterChambre(new Chambre(1, "Simple", 50));
-        gestionHotel.ajouterChambre(new Chambre(1, "Simple", 50));
-        gestionHotel.ajouterChambre(new Chambre(1, "Double", 80));
-        gestionHotel.ajouterChambre(new Chambre(1, "Double", 80 ));
+        // Ajout des chambres
+        gestionHotel.ajouterChambre(new Chambre(1, "Simple", 50, 1));
+        gestionHotel.ajouterChambre(new Chambre(2, "Simple", 50, 1));
+        gestionHotel.ajouterChambre(new Chambre(3, "Double", 80, 2));
+        gestionHotel.ajouterChambre(new Chambre(4, "Double", 80, 2));
 
-        gestionHotel.ajouterRepas(new Repas(9, 1,"Petit-déjeuner Continental : Croissants, pain frais, confiture, beurre, café, thé, et jus d'orange.",1));
-        gestionHotel.ajouterRepas(new Repas(12,1,"Petit Déjeuner Américain : oeufs brouillés, bacon, saucisses, pancakes au sirop d'érable, café, et jus de fruits.",2));
-        gestionHotel.ajouterRepas(new Repas(18, 1,"Buffet : Un assortiment de salades, charcuteries, plats chauds et desserts.",3));
-        gestionHotel.ajouterRepas(new Repas(20,1,"Repas traditionnel: Tajines kefta.", 4));
-        gestionHotel.ajouterRepas(new Repas(25, 1,"Gastronomique :  foie gras, sole meunière et crème brûlée.", 5));
-        gestionHotel.ajouterRepas(new Repas(22,1,"Dîner Asiatique : Chicken Katsu accompagné de riz et de curry ainsi que son saké.", 6));
+        // Ajout des repas
+        gestionHotel.ajouterRepas(new Repas(1, null, 9, "Petit-déjeuner Continental : Croissants, pain frais, confiture, beurre, café, thé, et jus d'orange."));
+        gestionHotel.ajouterRepas(new Repas(2, null, 12, "Petit Déjeuner Américain : oeufs brouillés, bacon, saucisses, pancakes au sirop d'érable, café, et jus de fruits."));
+        gestionHotel.ajouterRepas(new Repas(3, null, 18, "Buffet : Un assortiment de salades, charcuteries, plats chauds et desserts."));
+        gestionHotel.ajouterRepas(new Repas(4, null, 20, "Repas traditionnel: Tajines kefta."));
+        gestionHotel.ajouterRepas(new Repas(5, null, 25, "Gastronomique :  foie gras, sole meunière et crème brûlée."));
+        gestionHotel.ajouterRepas(new Repas(6, null, 22, "Dîner Asiatique : Chicken Katsu accompagné de riz et de curry ainsi que son saké."));
+        String nomClient = null;
+        String prenomClient = null;
+        Client client = null;
 
         int choix;
         Scanner scanner = new Scanner(System.in);
@@ -47,13 +53,10 @@ public class MainApp {
                 System.out.println("Effectuer une réservation :");
 
                 System.out.print("Entrez le nom du client : ");
-                String nomClient = scanner.next();
-
+                nomClient = scanner.next();
                 System.out.print("Entrez le prénom du client : ");
-                String prenomClient = scanner.next();  // Ajout de la saisie du prénom
-
-                int clientID = (int)(Math.random() * 10000);  // Génération d'un ID client aléatoire
-                Client client = new Client(clientID, nomClient, prenomClient);  // Création d'un nouveau client
+                prenomClient = scanner.next();
+                client = new Client((int)(Math.random() * 10000), nomClient, prenomClient);
 
                 System.out.print("Entrez le type de chambre (Simple/Double) : ");
                 String typeChambre = scanner.next().toLowerCase();
@@ -81,10 +84,34 @@ public class MainApp {
                     System.out.println("Liste des réservations :");
                     gestionHotel.afficherListeReservations();
                     break;
-                case 4: 
-                    System.out.println("Choisissez un repas :");
-                    gestionHotel.afficherRepasDisponibles();
-                    int choixRepas  = scanner.nextInt();
+
+
+                case 4:
+                System.out.println("Liste des repas disponibles :");
+                gestionHotel.afficherRepasDisponibles();
+                System.out.print("Choisissez un repas (entrez le numéro) : ");
+                int choixRepas = scanner.nextInt();
+                
+                System.out.print("Entrez le nom du client : ");
+                nomClient = scanner.next();
+                System.out.print("Entrez le prénom du client : ");
+                prenomClient = scanner.next();
+                client = new Client((int)(Math.random() * 10000), nomClient, prenomClient);
+            
+                // Récupérer le repas choisi
+                Repas repasChoisi = gestionHotel.getRepasByNumero(choixRepas);  // Suppose que vous avez une méthode pour récupérer un repas par numéro.
+                
+                if (repasChoisi != null) {
+                    gestionHotel.commanderRepas(client, repasChoisi);  // Utiliser l'objet Client initialisé
+                    System.out.println("Repas commandé avec succès !");
+                } else {
+                    System.out.println("Repas non trouvé.");
+                }
+                break;
+            
+
+                case 5:
+                    
 
                 case 0:
                     System.out.println("Merci d'avoir utilisé notre application. Au revoir !");
