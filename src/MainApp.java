@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import models.Client;
+import models.Facture;
 import models.Repas;
 import models.Chambre;
 import models.Reservation;
@@ -9,7 +10,6 @@ import services.GestionHotel;
 import services.ReservationException;
 import services.FichierUtils;
 import utils.Menu;
-
 public class MainApp {
 
     public static void main(String[] args) {
@@ -23,10 +23,10 @@ public class MainApp {
             GestionHotel gestionHotel = new GestionHotel(reservations);
 
             // Ajout des chambres
-            gestionHotel.ajouterChambre(new Chambre(1, "Simple", 50, 1));
-            gestionHotel.ajouterChambre(new Chambre(2, "Simple", 50, 1));
-            gestionHotel.ajouterChambre(new Chambre(3, "Double", 80, 2));
-            gestionHotel.ajouterChambre(new Chambre(4, "Double", 80, 2));
+            gestionHotel.ajouterChambre(new Chambre(1, "LuxeSimple", 250, 1));
+            gestionHotel.ajouterChambre(new Chambre(2, "LuxeDouble", 400, 2));
+            gestionHotel.ajouterChambre(new Chambre(3, "NormalSimple", 50, 1));
+            gestionHotel.ajouterChambre(new Chambre(4, "NormalDouble", 80, 2));
 
             // Ajout des repas
             gestionHotel.ajouterRepas(new Repas(1, null, 9, "Petit-déjeuner Continental"));
@@ -54,7 +54,7 @@ public class MainApp {
                         System.out.print("Entrez le prénom du client : ");
                         prenomClient = scanner.next();
                         client = new Client((int)(Math.random() * 10000), nomClient, prenomClient);
-                        gestionHotel.ajouterClient(client); // Ajoute le nouveau client à la liste
+                        gestionHotel.ajouterClient(client);
                         System.out.println("Client enregistré avec succès !");
                         break;
                     case 2:
@@ -71,21 +71,23 @@ public class MainApp {
                         client = gestionHotel.chercherClient(nomClient, prenomClient);
                     
                         if (client == null) {
-                            // Si le client n'est pas trouvé, créez un nouveau client
                             client = new Client((int) (Math.random() * 10000), nomClient, prenomClient);
-                            gestionHotel.ajouterClient(client); // Ajoute le nouveau client à la liste
+                            gestionHotel.ajouterClient(client);
                         }
                     
-                        System.out.print("Entrez le type de chambre (Simple/Double) : ");
+                        System.out.print("Entrez le type de chambre (LuxeSimple/LuxeDouble/NormalSimple/NormalDouble) : ");
                         String typeChambre = scanner.next().toLowerCase();
                         Chambre chambreReservee = gestionHotel.chercherChambreDisponible(typeChambre);
                     
                         if (chambreReservee != null) {
                             gestionHotel.effectuerReservation(client, chambreReservee);
                             System.out.println("Réservation effectuée avec succès pour " + nomClient + " " + prenomClient);
+                            double montantTotal = gestionHotel.calculerMontantTotalPourClient(client) - chambreReservee.getPrix();
+                            System.out.println("Facture totale après déduction : " + montantTotal + " euros");
                         } else {
                             System.out.println("Aucune chambre disponible de ce type.");
                         }
+                        
                         FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), "C:\\Users\\alexa\\OneDrive\\Bureau\\Hotel_management\\src\\data\\reservations.txt");
                         break;
                     
@@ -124,7 +126,7 @@ public class MainApp {
                         for (Client c : gestionHotel.getClients()) { // Ajoutez une méthode getClients dans GestionHotel
                             System.out.println("Nom du client : " + c.getNom() + " " + c.getPrenom());
                             // Calculez et affichez le montant total (frais de logement + repas)
-                            double montantTotal = gestionHotel.calculerMontantTotalPourClient(c); // Ajoutez une méthode calculerMontantTotalPourClient dans GestionHotel
+                            double montantTotal = gestionHotel.calculerMontantTotalPourClient(c);
                             System.out.println("Montant total à payer : " + montantTotal);
                             System.out.println("------");
                         }
