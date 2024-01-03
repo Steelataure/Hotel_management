@@ -1,14 +1,20 @@
 package models;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Reservation implements Serializable {
+    private static int nextReservationNumber = 1;
     private Client client;
     private Chambre chambre;
     private Date dateDebut;
     private Date dateFin;
+    private List<Repas> repas = new ArrayList<>();
+    private int numero;
 
     public Reservation(Client client, Chambre chambre, Date dateDebut, Date dateFin) {
+        this.numero = nextReservationNumber++;
         this.client = client;
         this.chambre = chambre;
         this.dateDebut = dateDebut;
@@ -39,6 +45,14 @@ public class Reservation implements Serializable {
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
+    public int getNumero() {
+        return this.numero;
+    }
+    public void ajouterRepas(Repas repasChoisi) {
+        this.repas.add(repasChoisi);
+    }
+    
+
     @Override
     public String toString() {
         return "Reservation{" +
@@ -49,5 +63,4 @@ public class Reservation implements Serializable {
                 // Vous pouvez ajouter d'autres attributs comme le repas, le prix, etc.
                 '}';
     }
-        
 }

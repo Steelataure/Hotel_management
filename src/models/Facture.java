@@ -4,31 +4,42 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Facture implements Serializable {
-    private Reservation reservation;
-    private double montantTotal;
-    private List<Repas> repas;
+    private Client client;
+    private List<Repas> repasConsommes;
+    private double fraisLogement;
+    private double fraisRepas;
 
-    public Facture(Reservation reservation, double montantTotal, List<Repas> repas) {
-        this.reservation = reservation;
-        this.montantTotal = montantTotal;
-        this.repas = repas;
-    }
-
-    public Reservation getReservation() {
-        return this.reservation;
+    public Facture(Client client, List<Repas> repasConsommes, double fraisLogement, double fraisRepas) {
+        this.client = client;
+        this.repasConsommes = repasConsommes;
+        this.fraisLogement = fraisLogement;
+        this.fraisRepas = fraisRepas;
     }
 
-    public double getMontantTotal() {
-        return this.montantTotal;
+    public double getTotal() {
+        return fraisLogement + fraisRepas;
     }
-    public List<Repas> getRepas() {
-        return this.repas;
+    public Client getClient() {
+        return client;
     }
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
+    public List<Repas> getRepasConsommes() {
+        return repasConsommes;
     }
-    public void setMontantTotal(double montantTotal) {
-        this.montantTotal = montantTotal;
+    public double getFraisLogement() {
+        return fraisLogement;
+    }
+    public double getFraisRepas() {
+        return fraisRepas;
     }
 
+    @Override
+    public String toString() {
+        return "Facture{" +
+                "client=" + client +
+                ", repasConsommes=" + repasConsommes +
+                ", fraisLogement=" + fraisLogement +
+                ", fraisRepas=" + fraisRepas +
+                '}';
+    }
+    
 }
