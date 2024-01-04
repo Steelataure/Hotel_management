@@ -23,10 +23,10 @@ public class MainApp {
             GestionHotel gestionHotel = new GestionHotel(reservations);
 
             // Ajout des chambres
-            gestionHotel.ajouterChambre(new Chambre(1, "Luxe Simple", 250, 1));
-            gestionHotel.ajouterChambre(new Chambre(2, "Luxe Double", 400, 2));
-            gestionHotel.ajouterChambre(new Chambre(3, "Normal Simple", 50, 1));
-            gestionHotel.ajouterChambre(new Chambre(4, "Normal Double", 80, 2));
+            gestionHotel.ajouterChambre(new Chambre(1, "Luxe_Simple", 250, 1));
+            gestionHotel.ajouterChambre(new Chambre(2, "Luxe_Double", 400, 2));
+            gestionHotel.ajouterChambre(new Chambre(3, "Normal_Simple", 50, 1));
+            gestionHotel.ajouterChambre(new Chambre(4, "Normal_Double", 80, 2));
 
             // Ajout des repas
             gestionHotel.ajouterRepas(new Repas(1, null, 9, "Petit-déjeuner Continental"));
@@ -75,7 +75,7 @@ public class MainApp {
                             gestionHotel.ajouterClient(client);
                         }
                     
-                        System.out.print("Entrez le type de chambre (Luxe Simple / Luxe Double / Normal Simple / Normal Double) : ");
+                        System.out.print("Entrez le type de chambre (Luxe_Simple / Luxe_Double / Normal_Simple / Normal_Double) : ");
                         String typeChambre = scanner.next().toLowerCase();
                         Chambre chambreReservee = gestionHotel.chercherChambreDisponible(typeChambre);
                     
