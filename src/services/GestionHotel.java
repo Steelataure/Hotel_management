@@ -19,6 +19,16 @@ public class GestionHotel {
         this.reservations = reservations;
     }
 
+    public void annulerReservation(Reservation reservation) {
+        if (reservations.contains(reservation)) {
+            reservations.remove(reservation);
+            reservation.getChambre().setEstDisponible(true);
+            System.out.println("La réservation a été annulée avec succès.");
+        } else {
+            System.out.println("La réservation n'a pas été trouvée.");
+        }
+    }
+    
     // Ajouter une chambre
     public void ajouterChambre(Chambre chambre) {
         chambres.add(chambre);
@@ -113,18 +123,21 @@ public class GestionHotel {
     }
 
 
-    // Modifier une réservation
     public void modifierReservation(Reservation ancienneReservation, Reservation nouvelleReservation) {
-        // Implémentation de la modification de réservation
-    }
-
-    // Annuler une réservation
-    public void annulerReservation(Reservation reservation) {
-        if (reservations.contains(reservation)) {
-            reservations.remove(reservation);
-            reservation.getChambre().setEstDisponible(true);
+        if (reservations.contains(ancienneReservation)) {
+            // Annuler l'ancienne réservation
+            annulerReservation(ancienneReservation);
+            try {
+                effectuerReservation(nouvelleReservation.getClient(), nouvelleReservation.getChambre());
+                System.out.println("La réservation a été modifiée avec succès.");
+            } catch (ReservationException e) {
+                System.out.println("Erreur lors de la modification de la réservation : " + e.getMessage());
+            }
+        } else {
+            System.out.println("La réservation à modifier n'a pas été trouvée.");
         }
     }
+    
 
     // Commander un repas pour un client
     public void commanderRepas(Client client, Repas repas) {
@@ -142,8 +155,6 @@ public class GestionHotel {
             }
         }
     }
-    
-
 
     // Enregistrer la facture pour un client
     public void enregistrerFacture(Client client) {

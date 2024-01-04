@@ -43,6 +43,7 @@ public class MainApp {
             int choix;
             Scanner scanner = new Scanner(System.in);
 
+
             do {
                 Menu.afficherMenuPrincipal();
                 choix = scanner.nextInt();
@@ -63,6 +64,11 @@ public class MainApp {
                         break;
 
                     case 3:
+                        System.out.println("Liste des réservations :");
+                        gestionHotel.afficherListeReservations();
+                        break;
+
+                    case 4:
                         System.out.println("Effectuer une réservation :");
                         System.out.print("Entrez le nom du client : ");
                         nomClient = scanner.next();
@@ -90,13 +96,49 @@ public class MainApp {
                         
                         FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), "C:\\Users\\alexa\\OneDrive\\Bureau\\Hotel_management\\src\\data\\reservations.txt");
                         break;
-                    
-                    case 4:
-                        System.out.println("Liste des réservations :");
-                        gestionHotel.afficherListeReservations();
+
+                        case 5:
+                        System.out.println("Entrez le numéro de réservation à modifier :");
+                        int numeroReservationModif = scanner.nextInt();
+                        Reservation reservationModif = gestionHotel.rechercherReservationParNumero(numeroReservationModif);
+                        if (reservationModif != null) {
+                            System.out.println("Que souhaitez-vous modifier ?");
+                            System.out.println("1. Changer la chambre");
+                            System.out.println("2. Changer la date");
+                            int choixModification = scanner.nextInt();
+                                                
+                            switch (choixModification) {
+                                case 1:
+                                    System.out.print("Entrez le type de chambre (Luxe_Simple / Luxe_Double / Normal_Simple / Normal_Double) : ");
+                                    String typeChambreModif = scanner.next().toLowerCase(); // Renommé la variable ici
+                                    Chambre chambreReserveeModif = gestionHotel.chercherChambreDisponible(typeChambreModif); // Renommé la variable ici
+                                                    
+                                    if (chambreReserveeModif != null) {
+                                        // Votre logique ici
+                                    } else {
+                                        System.out.println("Aucune chambre disponible de ce type.");
+                                    }
+                                    break;
+                                // Le reste de votre code
+                            }
+                        } else {
+                            System.out.println("Réservation non trouvée.");
+                        }
                         break;
                     
-                    case 5:
+                    case 6:
+                        System.out.println("Entrez le numéro de réservation à annuler :");
+                        int numeroReservation = scanner.nextInt();
+                        Reservation reservation = gestionHotel.rechercherReservationParNumero(numeroReservation);
+                        if (reservation != null) {
+                            gestionHotel.annulerReservation(reservation);  // Passer l'objet Reservation directement
+                        } else {
+                            System.out.println("Réservation non trouvée.");
+                        }
+                        break;
+            
+                        
+                    case 7:
                         System.out.println("Choisissez un repas :");
                         gestionHotel.afficherRepasDisponibles();
                         int choixRepas = scanner.nextInt();
@@ -120,7 +162,7 @@ public class MainApp {
                         }
                         break;
                     
-                    case 6:
+                    case 8:
                         // Afficher la facture actuelle et le montant total pour chaque client
                         System.out.println("Factures actuelles :");
                         for (Client c : gestionHotel.getClients()) { // Ajoutez une méthode getClients dans GestionHotel
