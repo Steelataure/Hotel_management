@@ -50,27 +50,6 @@ public class GestionHotel {
         repasDisponibles.add(repas);
     }
 
-    public void genererFacture(Client client) {
-        double totalChambres = 0.0;
-        double totalRepas = 0.0;
-    
-        for (Chambre chambre : client.getChambresReservees()) {
-            // Calculer le coût total des chambres réservées
-            totalChambres += chambre.getPrix(); // Supposons que chaque chambre ait une méthode getPrix()
-        }
-    
-        for (Repas repas : client.getRepasCommandes()) {
-            // Calculer le coût total des repas commandés
-            totalRepas += repas.getPrix(); // Supposons que chaque repas ait une méthode getPrix()
-        }
-    
-        // Afficher la facture combinée
-        System.out.println("Facture pour " + client.getNom() + " " + client.getPrenom());
-        System.out.println("Coût total des chambres : " + totalChambres);
-        System.out.println("Coût total des repas : " + totalRepas);
-        System.out.println("Coût total à payer : " + (totalChambres + totalRepas));
-    }
-    
 
     public Reservation rechercherReservationParNumero(int numeroReservation) {
         for (Reservation reservation : reservations) {
@@ -78,25 +57,16 @@ public class GestionHotel {
                 return reservation;
             }
         }
-        return null;  // Return null if reservation not found
+        return null;
     }
     
-    public void ajouterRepasAReservation(int numeroReservation, Repas repas) {
-        Reservation reservation = rechercherReservationParNumero(numeroReservation);
-        if (reservation != null) {
-            reservation.ajouterRepas(repas);
-        } else {
-            System.out.println("La réservation avec le numéro " + numeroReservation + " n'a pas été trouvée.");
-        }
-    }
-
     public Repas rechercherRepasParNumero(int numero) {
-        for (Repas repas : repasDisponibles) { // Supposons que repasDisponibles est la liste où vous stockez les repas disponibles.
-            if (repas.getNumero() == numero) { // Supposons que chaque repas ait une méthode getNumero() qui retourne son numéro.
-                return repas; // Retournez le repas si le numéro correspond.
+        for (Repas repas : repasDisponibles) {
+            if (repas.getNumero() == numero) {
+                return repas; 
             }
         }
-        return null; // Retournez null si aucun repas avec ce numéro n'est trouvé.
+        return null;
     }
     
     public void effectuerReservation(Client client, Chambre chambre) throws ReservationException {
@@ -125,7 +95,6 @@ public class GestionHotel {
 
     public void modifierReservation(Reservation ancienneReservation, Reservation nouvelleReservation) {
         if (reservations.contains(ancienneReservation)) {
-            // Annuler l'ancienne réservation
             annulerReservation(ancienneReservation);
             try {
                 effectuerReservation(nouvelleReservation.getClient(), nouvelleReservation.getChambre());
@@ -138,12 +107,6 @@ public class GestionHotel {
         }
     }
     
-
-    // Commander un repas pour un client
-    public void commanderRepas(Client client, Repas repas) {
-        System.out.println("Commande de repas pour " + client.getNom() + " : " + repas.getDescription());
-        // Ici, vous pouvez ajouter d'autres fonctionnalités, comme la création d'une facture pour le repas.
-    }
 
     public void afficherRepasDisponibles() {
         if (repasDisponibles.isEmpty()) {
@@ -159,7 +122,6 @@ public class GestionHotel {
     // Enregistrer la facture pour un client
     public void enregistrerFacture(Client client) {
         System.out.println("Facture enregistrée pour " + client.getNom());
-        // Implémentation de l'enregistrement de facture
     }
 
     // Chercher une chambre disponible par type
@@ -167,16 +129,6 @@ public class GestionHotel {
         for (Chambre chambre : chambres) {
             if (chambre.isEstDisponible() && chambre.getType().equalsIgnoreCase(typeChambre)) {
                 return chambre;
-            }
-        }
-        return null;
-    }
-
-    // Chercher un client par nom
-    public Client chercherClient(String nomClient) {
-        for (Client client : clients) {
-            if (client.getNom().equalsIgnoreCase(nomClient)) {
-                return client;
             }
         }
         return null;
@@ -204,7 +156,7 @@ public class GestionHotel {
                 return client;
             }
         }
-        return null;  // Retourne null si le client n'est pas trouvé
+        return null;
     }
     
     // Ajouter un repas à un client
@@ -214,6 +166,15 @@ public class GestionHotel {
             System.out.println("Repas ajouté au client avec succès !");
         } else {
             System.out.println("Impossible d'ajouter le repas au client.");
+        }
+    }
+
+    public void ajouterReservationAuClient(Client client, Chambre chambre) {
+        if (client!= null && chambre!= null) {
+            client.ajouterChambreReservee(chambre);
+            System.out.println("Réservation ajoutée au client avec succès!");
+        } else {
+            System.out.println("Impossible d'ajouter la réservation au client.");
         }
     }
     

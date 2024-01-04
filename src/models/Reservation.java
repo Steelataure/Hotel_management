@@ -55,13 +55,12 @@ public class Reservation implements Serializable {
 
     @Override
     public String toString() {
-        return "Reservation{" +
+        return "Reservation | " +
                 "Numero=" + chambre.getNumero() +
-                "Client=" + client.getNom() + " " + client.getPrenom() +
+                " Client=" + client.getNom() + " " + client.getPrenom() +
                 ", Chambre=" + chambre.getType() +
                 ", Date début=" + dateDebut +
                 ", Date fin=" + dateFin +
-                // Vous pouvez ajouter d'autres attributs comme le repas, le prix, etc.
                 '}';
     }
 }

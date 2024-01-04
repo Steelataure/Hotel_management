@@ -13,6 +13,7 @@ import utils.Menu;
 public class MainApp {
 
     public static void main(String[] args) {
+        String file = "src\\data\\reservations.txt";
         try {
             // Charger les réservations depuis le fichier
             List<Reservation> reservations = FichierUtils.chargerReservations("src\\data\\reservations.txt");
@@ -89,12 +90,14 @@ public class MainApp {
                             gestionHotel.effectuerReservation(client, chambreReservee);
                             System.out.println("Réservation effectuée avec succès pour " + nomClient + " " + prenomClient);
                             double montantTotal = gestionHotel.calculerMontantTotalPourClient(client) - chambreReservee.getPrix();
+                            gestionHotel.ajouterReservationAuClient(client, chambreReservee);
+
                             System.out.println("Facture totale après déduction : " + montantTotal + " euros");
                         } else {
                             System.out.println("Aucune chambre disponible de ce type.");
                         }
                         
-                        FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), "C:\\Users\\alexa\\OneDrive\\Bureau\\Hotel_management\\src\\data\\reservations.txt");
+                        FichierUtils.sauvegarderReservations(gestionHotel.getReservations(), file);
                         break;
 
                         case 5:
@@ -110,16 +113,14 @@ public class MainApp {
                             switch (choixModification) {
                                 case 1:
                                     System.out.print("Entrez le type de chambre (Luxe_Simple / Luxe_Double / Normal_Simple / Normal_Double) : ");
-                                    String typeChambreModif = scanner.next().toLowerCase(); // Renommé la variable ici
-                                    Chambre chambreReserveeModif = gestionHotel.chercherChambreDisponible(typeChambreModif); // Renommé la variable ici
+                                    String typeChambreModif = scanner.next().toLowerCase();
+                                    Chambre chambreReserveeModif = gestionHotel.chercherChambreDisponible(typeChambreModif); 
                                                     
                                     if (chambreReserveeModif != null) {
-                                        // Votre logique ici
                                     } else {
                                         System.out.println("Aucune chambre disponible de ce type.");
                                     }
                                     break;
-                                // Le reste de votre code
                             }
                         } else {
                             System.out.println("Réservation non trouvée.");
@@ -131,7 +132,7 @@ public class MainApp {
                         int numeroReservation = scanner.nextInt();
                         Reservation reservation = gestionHotel.rechercherReservationParNumero(numeroReservation);
                         if (reservation != null) {
-                            gestionHotel.annulerReservation(reservation);  // Passer l'objet Reservation directement
+                            gestionHotel.annulerReservation(reservation);
                         } else {
                             System.out.println("Réservation non trouvée.");
                         }
@@ -165,9 +166,8 @@ public class MainApp {
                     case 8:
                         // Afficher la facture actuelle et le montant total pour chaque client
                         System.out.println("Factures actuelles :");
-                        for (Client c : gestionHotel.getClients()) { // Ajoutez une méthode getClients dans GestionHotel
+                        for (Client c : gestionHotel.getClients()) {
                             System.out.println("Nom du client : " + c.getNom() + " " + c.getPrenom());
-                            // Calculez et affichez le montant total (frais de logement + repas)
                             double montantTotal = gestionHotel.calculerMontantTotalPourClient(c);
                             System.out.println("Montant total à payer : " + montantTotal);
                             System.out.println("------");
