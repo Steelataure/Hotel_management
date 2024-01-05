@@ -8,15 +8,15 @@ public class Client implements Serializable {
     private int clientID;
     private String nom;
     private String prenom;
-    private List<Chambre> chambresReservees; // Liste pour stocker les chambres réservées
-    private List<Repas> repasCommandes;      // Liste pour stocker les repas commandés
+    private List<Chambre> chambresReservees;
+    private List<Repas> repasCommandes;  
 
     public Client(int clientID, String nom, String prenom) {
-        this.clientID = clientID; // Identifiant unique du client
-        this.nom = nom;           // Nom du client
-        this.prenom = prenom;     // Prénom du client
-        this.chambresReservees = new ArrayList<>(); // Initialisation de la liste des chambres
-        this.repasCommandes = new ArrayList<>();    // Initialisation de la liste des repas
+        this.clientID = clientID;
+        this.nom = nom;        
+        this.prenom = prenom;     
+        this.chambresReservees = new ArrayList<>(); 
+        this.repasCommandes = new ArrayList<>();  
     }
 
     public int getClientID() {

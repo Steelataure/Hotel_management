@@ -10,6 +10,8 @@ import services.GestionHotel;
 import services.ReservationException;
 import services.FichierUtils;
 import utils.Menu;
+
+
 public class MainApp {
 
     public static void main(String[] args) {
@@ -18,7 +20,7 @@ public class MainApp {
             // Charger les réservations depuis le fichier
             List<Reservation> reservations = FichierUtils.chargerReservations("src\\data\\reservations.txt");
             if (reservations == null) {
-                reservations = new ArrayList<>();  // Initialiser une nouvelle liste si elle est null
+                reservations = new ArrayList<>();
             }
 
             GestionHotel gestionHotel = new GestionHotel(reservations);

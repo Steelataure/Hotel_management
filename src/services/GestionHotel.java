@@ -187,14 +187,13 @@ public class GestionHotel {
     public double calculerMontantTotalPourClient(Client client) {
         double montantTotal = 0.0;
         
-        // Calculer le montant total des chambres réservées (ceci est un exemple simplifié)
         for (Chambre chambre : client.getChambresReservees()) {
-            montantTotal += chambre.getPrix();  // Supposons que chaque chambre ait une méthode getPrix()
+            montantTotal += chambre.getPrix(); 
         }
         
         // Ajouter le montant total des repas commandés (ceci est un exemple simplifié)
         for (Repas repas : client.getRepasCommandes()) {
-            montantTotal += repas.getPrix();  // Supposons que chaque repas ait une méthode getPrix()
+            montantTotal += repas.getPrix();
         }
         
         return montantTotal;
