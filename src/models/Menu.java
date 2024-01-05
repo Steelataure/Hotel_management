@@ -1,6 +1,4 @@
-package utils;
-
-import java.util.Scanner;
+package models;
 
 public class Menu {
     public static void afficherMenuPrincipal() {
@@ -16,6 +14,5 @@ public class Menu {
         System.out.println("8. Afficher la facture actuelle");
         System.out.println("0. Quitter");
         System.out.println("----------------------------------------------------");
-
     }
 }

@@ -2,12 +2,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import models.Client;
+import models.FichierUtils;
+import models.GestionHotel;
+import models.Menu;
 import models.Repas;
 import models.Chambre;
 import models.Reservation;
-import services.GestionHotel;
-import services.FichierUtils;
-import utils.Menu;
 
 
 public class MainApp {
@@ -15,7 +15,6 @@ public class MainApp {
     public static void main(String[] args) {
         String file = "src\\data\\reservations.txt";
         try {
-            // Charger les réservations depuis le fichier
             List<Reservation> reservations = FichierUtils.chargerReservations("src\\data\\reservations.txt");
             if (reservations == null) {
                 reservations = new ArrayList<>();
@@ -87,10 +86,7 @@ public class MainApp {
                         if (chambreReservee != null) {
                             gestionHotel.effectuerReservation(client, chambreReservee);
                             System.out.println("Réservation effectuée avec succès pour " + nomClient + " " + prenomClient);
-                            double montantTotal = gestionHotel.calculerMontantTotalPourClient(client) - chambreReservee.getPrix();
-                            gestionHotel.ajouterReservationAuClient(client, chambreReservee);
-
-                            System.out.println("Facture totale après déduction : " + montantTotal + " euros");
+                            client.ajouterReservation(chambreReservee);
                         } else {
                             System.out.println("Aucune chambre disponible de ce type.");
                         }
@@ -135,7 +131,6 @@ public class MainApp {
                             System.out.println("Réservation non trouvée");
                         }
                         break;
-            
                         
                     case 7:
                         System.out.println("Choisissez un repas :");
@@ -165,7 +160,7 @@ public class MainApp {
                         System.out.println("Factures actuelles :");
                         for (Client c : gestionHotel.getClients()) {
                             System.out.println("Nom du client : " + c.getNom() + " " + c.getPrenom());
-                            double montantTotal = gestionHotel.calculerMontantTotalPourClient(c);
+                            double montantTotal = c.calculerMontantTotal();
                             System.out.println("Montant total à payer : " + montantTotal);
                             System.out.println("------");
                         }

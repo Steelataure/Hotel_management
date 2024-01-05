@@ -38,6 +38,29 @@ public class Client implements Serializable {
     public void ajouterRepasCommande(Repas repas) {
         repasCommandes.add(repas);
     }
+    
+    public void ajouterReservation(Chambre chambre) {
+        if (chambre != null) {
+            ajouterChambreReservee(chambre);
+            System.out.println("Réservation ajoutée au client avec succès!");
+        } else {
+            System.out.println("Impossible d'ajouter la réservation au client.");
+        }
+    }
+    
+    public double calculerMontantTotal() {
+        double montantTotal = 0.0;
+        
+        for (Chambre chambre : chambresReservees) {
+            montantTotal += chambre.getPrix(); 
+        }
+        
+        for (Repas repas : repasCommandes) {
+            montantTotal += repas.getPrix();
+        }
+        
+        return montantTotal;
+    }
 
     public List<Chambre> getChambresReservees() {
         return chambresReservees;

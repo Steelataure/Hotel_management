@@ -1,12 +1,9 @@
-package services;
-
-import models.Client;
-import models.Chambre;
-import models.Reservation;
-import models.Repas;
+package models;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import services.ReservationException;
 
 public class GestionHotel {
     private List<Client> clients = new ArrayList<>();
@@ -29,6 +26,14 @@ public class GestionHotel {
         }
     }
     
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+    
+    public List<Client> getClients() {
+        return clients;
+    }
+
     public void ajouterChambre(Chambre chambre) {
         chambres.add(chambre);
     }
@@ -37,16 +42,15 @@ public class GestionHotel {
         clients.add(client);
     }
 
+    public void ajouterRepas(Repas repas) {
+        repasDisponibles.add(repas);
+    }
+
     public void afficherChambresDisponibles() {
         for (Chambre chambre : chambres) {
             System.out.println(chambre.toString());
         }
     }
-
-    public void ajouterRepas(Repas repas) {
-        repasDisponibles.add(repas);
-    }
-
 
     public Reservation rechercherReservationParNumero(int numeroReservation) {
         for (Reservation reservation : reservations) {
@@ -116,10 +120,6 @@ public class GestionHotel {
         }
     }
 
-    public void enregistrerFacture(Client client) {
-        System.out.println("Facture enregistrée pour " + client.getNom());
-    }
-
     public Chambre chercherChambreDisponible(String typeChambre) {
         for (Chambre chambre : chambres) {
             if (chambre.isEstDisponible() && chambre.getType().equalsIgnoreCase(typeChambre)) {
@@ -140,10 +140,6 @@ public class GestionHotel {
         }
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
     public Client chercherClient(String nom, String prenom) {
         for (Client client : clients) {
             if (client.getNom().equalsIgnoreCase(nom) && client.getPrenom().equalsIgnoreCase(prenom)) {
@@ -162,30 +158,4 @@ public class GestionHotel {
         }
     }
 
-    public void ajouterReservationAuClient(Client client, Chambre chambre) {
-        if (client!= null && chambre!= null) {
-            client.ajouterChambreReservee(chambre);
-            System.out.println("Réservation ajoutée au client avec succès!");
-        } else {
-            System.out.println("Impossible d'ajouter la réservation au client.");
-        }
-    }
-    
-    public List<Client> getClients() {
-        return clients;
-    }
-    
-    public double calculerMontantTotalPourClient(Client client) {
-        double montantTotal = 0.0;
-        
-        for (Chambre chambre : client.getChambresReservees()) {
-            montantTotal += chambre.getPrix(); 
-        }
-        
-        for (Repas repas : client.getRepasCommandes()) {
-            montantTotal += repas.getPrix();
-        }
-        
-        return montantTotal;
-    }
 }
