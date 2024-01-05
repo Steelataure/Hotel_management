@@ -2,12 +2,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import models.Client;
-import models.Facture;
 import models.Repas;
 import models.Chambre;
 import models.Reservation;
 import services.GestionHotel;
-import services.ReservationException;
 import services.FichierUtils;
 import utils.Menu;
 
@@ -22,16 +20,14 @@ public class MainApp {
             if (reservations == null) {
                 reservations = new ArrayList<>();
             }
-
+            
             GestionHotel gestionHotel = new GestionHotel(reservations);
 
-            // Ajout des chambres
             gestionHotel.ajouterChambre(new Chambre(1, "Luxe_Simple", 250, 1));
             gestionHotel.ajouterChambre(new Chambre(2, "Luxe_Double", 400, 2));
             gestionHotel.ajouterChambre(new Chambre(3, "Normal_Simple", 50, 1));
             gestionHotel.ajouterChambre(new Chambre(4, "Normal_Double", 80, 2));
 
-            // Ajout des repas
             gestionHotel.ajouterRepas(new Repas(1, null, 9, "Petit-déjeuner Continental"));
             gestionHotel.ajouterRepas(new Repas(2, null, 12, "Petit Déjeuner Américain"));
             gestionHotel.ajouterRepas(new Repas(3, null, 18, "Buffet"));
@@ -120,12 +116,12 @@ public class MainApp {
                                                     
                                     if (chambreReserveeModif != null) {
                                     } else {
-                                        System.out.println("Aucune chambre disponible de ce type.");
+                                        System.out.println("Aucune chambre disponible de ce type");
                                     }
                                     break;
                             }
                         } else {
-                            System.out.println("Réservation non trouvée.");
+                            System.out.println("Réservation non trouvée");
                         }
                         break;
                     
@@ -136,7 +132,7 @@ public class MainApp {
                         if (reservation != null) {
                             gestionHotel.annulerReservation(reservation);
                         } else {
-                            System.out.println("Réservation non trouvée.");
+                            System.out.println("Réservation non trouvée");
                         }
                         break;
             
@@ -158,15 +154,14 @@ public class MainApp {
                                 gestionHotel.ajouterRepasAuClient(client, repasChoisi);
                                 System.out.println("Repas ajouté au client avec succès !");
                             } else {
-                                System.out.println("Repas non trouvé. Veuillez réessayer.");
+                                System.out.println("Repas non trouvé. Veuillez réessayer");
                             }
                         } else {
-                            System.out.println("Client non trouvé. Veuillez réessayer.");
+                            System.out.println("Client non trouvé. Veuillez réessayer");
                         }
                         break;
                     
                     case 8:
-                        // Afficher la facture actuelle et le montant total pour chaque client
                         System.out.println("Factures actuelles :");
                         for (Client c : gestionHotel.getClients()) {
                             System.out.println("Nom du client : " + c.getNom() + " " + c.getPrenom());
@@ -180,7 +175,7 @@ public class MainApp {
                         break;
 
                     default:
-                        System.out.println("Choix non valide. Veuillez réessayer.");
+                        System.out.println("Choix non valide. Veuillez réessayer");
                         break;
                 }
             } while (choix != 0);

@@ -31,7 +31,6 @@ public class Client implements Serializable {
         return prenom;
     }
 
-    // Méthodes pour ajouter une chambre réservée et un repas commandé
     public void ajouterChambreReservee(Chambre chambre) {
         chambresReservees.add(chambre);
     }
@@ -40,7 +39,6 @@ public class Client implements Serializable {
         repasCommandes.add(repas);
     }
 
-    // Méthodes pour obtenir les listes des chambres et repas
     public List<Chambre> getChambresReservees() {
         return chambresReservees;
     }
@@ -49,12 +47,11 @@ public class Client implements Serializable {
         return repasCommandes;
     }
     @Override
-public String toString() {
-    return "Client{" +
-            "clientID=" + clientID +
-            ", nom='" + nom + '\'' +
-            ", prenom='" + prenom + '\'' +
-            '}';
-}
-
+    public String toString() {
+        return "Client{" +
+                "clientID=" + clientID +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                '}';
+    }
 }

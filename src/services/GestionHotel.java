@@ -29,17 +29,14 @@ public class GestionHotel {
         }
     }
     
-    // Ajouter une chambre
     public void ajouterChambre(Chambre chambre) {
         chambres.add(chambre);
     }
 
-    // Ajouter un client
     public void ajouterClient(Client client) {
         clients.add(client);
     }
 
-    // Afficher les chambres disponibles
     public void afficherChambresDisponibles() {
         for (Chambre chambre : chambres) {
             System.out.println(chambre.toString());
@@ -119,12 +116,10 @@ public class GestionHotel {
         }
     }
 
-    // Enregistrer la facture pour un client
     public void enregistrerFacture(Client client) {
         System.out.println("Facture enregistrée pour " + client.getNom());
     }
 
-    // Chercher une chambre disponible par type
     public Chambre chercherChambreDisponible(String typeChambre) {
         for (Chambre chambre : chambres) {
             if (chambre.isEstDisponible() && chambre.getType().equalsIgnoreCase(typeChambre)) {
@@ -134,7 +129,6 @@ public class GestionHotel {
         return null;
     }
 
-    // Afficher la liste des réservations
     public void afficherListeReservations() {
         if (reservations.isEmpty()) {
             System.out.println("Aucune réservation enregistrée.");
@@ -159,7 +153,6 @@ public class GestionHotel {
         return null;
     }
     
-    // Ajouter un repas à un client
     public void ajouterRepasAuClient(Client client, Repas repas) {
         if (client != null && repas != null) {
             client.ajouterRepasCommande(repas);
@@ -178,12 +171,10 @@ public class GestionHotel {
         }
     }
     
-    // Obtenir la liste des clients
     public List<Client> getClients() {
         return clients;
     }
     
-    // Calculer le montant total à facturer à un client (cette méthode peut être simplifiée)
     public double calculerMontantTotalPourClient(Client client) {
         double montantTotal = 0.0;
         
@@ -191,7 +182,6 @@ public class GestionHotel {
             montantTotal += chambre.getPrix(); 
         }
         
-        // Ajouter le montant total des repas commandés (ceci est un exemple simplifié)
         for (Repas repas : client.getRepasCommandes()) {
             montantTotal += repas.getPrix();
         }

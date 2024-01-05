@@ -18,10 +18,4 @@ public class Menu {
         System.out.println("----------------------------------------------------");
 
     }
-
-    public static int lireChoixUtilisateur() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            return scanner.nextInt();
-        }
-    }
 }

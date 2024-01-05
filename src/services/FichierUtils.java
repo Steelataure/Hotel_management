@@ -8,10 +8,8 @@ import models.Reservation;
 
 public class FichierUtils {
 
-    // Chemin par défaut pour sauvegarder le fichier
     private static final String CHEMIN_PAR_DEFAUT = "src\\data\\reservations.txt";
 
-    // Sauvegarder les réservations dans un fichier
     public static void sauvegarderReservations(List<Reservation> reservations, String nomFichier) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomFichier))) {
             oos.writeObject(reservations);
@@ -43,18 +41,15 @@ public class FichierUtils {
     }
 
 
-    // Méthode pour charger les réservations avec un chemin par défaut
     public static List<Reservation> chargerReservationsParDefaut() {
         return chargerReservations(CHEMIN_PAR_DEFAUT);
     }
 
-    // Méthode pour vérifier si un fichier existe
     public static boolean fichierExiste(String nomFichier) {
         File file = new File(nomFichier);
         return file.exists();
     }
 
-    // Méthode pour supprimer un fichier de sauvegarde
     public static void supprimerFichier(String nomFichier) {
         File file = new File(nomFichier);
         if (file.exists()) {
