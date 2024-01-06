@@ -37,6 +37,7 @@ public class MainApp {
             String nomClient;
             String prenomClient;
             Client client;
+            int dureeSejour;
 
             int choix;
             Scanner scanner = new Scanner(System.in);
@@ -84,7 +85,13 @@ public class MainApp {
                         Chambre chambreReservee = gestionHotel.chercherChambreDisponible(typeChambre);
                     
                         if (chambreReservee != null) {
-                            gestionHotel.effectuerReservation(client, chambreReservee);
+                            System.out.println("Durée de votre réservation : ");
+                            dureeSejour = scanner.nextInt();
+
+                            gestionHotel.effectuerReservation(client, chambreReservee, dureeSejour);
+                            int prix_totaux = dureeSejour * chambreReservee.getPrix();
+                            chambreReservee.setPrix(prix_totaux);
+                            
                             System.out.println("Réservation effectuée avec succès pour " + nomClient + " " + prenomClient);
                             client.ajouterReservation(chambreReservee);
                         } else {
@@ -101,7 +108,7 @@ public class MainApp {
                         if (reservationModif != null) {
                             System.out.println("Que souhaitez-vous modifier ?");
                             System.out.println("1. Changer la chambre");
-                            System.out.println("2. Changer la date");
+                            System.out.println("2. Changer la durée de séjour");
                             int choixModification = scanner.nextInt();
                                                 
                             switch (choixModification) {

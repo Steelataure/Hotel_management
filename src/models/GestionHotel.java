@@ -69,7 +69,7 @@ public class GestionHotel {
         return null;
     }
     
-    public void effectuerReservation(Client client, Chambre chambre) throws ReservationException {
+    public void effectuerReservation(Client client, Chambre chambre, int dureeSejour) throws ReservationException {
 
         System.out.println("Début de la réservation pour le client : " + client.getNom() + client.getPrenom());
         
@@ -85,7 +85,8 @@ public class GestionHotel {
         
         System.out.println("Création de la réservation...");
         
-        Reservation reservation = new Reservation(client, chambre, null, null);
+
+        Reservation reservation = new Reservation(client, chambre, null, null, dureeSejour);
         reservations.add(reservation);
         chambre.setEstDisponible(false);
         
@@ -97,7 +98,7 @@ public class GestionHotel {
         if (reservations.contains(ancienneReservation)) {
             annulerReservation(ancienneReservation);
             try {
-                effectuerReservation(nouvelleReservation.getClient(), nouvelleReservation.getChambre());
+                effectuerReservation(nouvelleReservation.getClient(), nouvelleReservation.getChambre(), 1);
                 System.out.println("La réservation a été modifiée avec succès.");
             } catch (ReservationException e) {
                 System.out.println("Erreur lors de la modification de la réservation : " + e.getMessage());

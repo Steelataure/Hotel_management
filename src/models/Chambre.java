@@ -25,13 +25,8 @@ public class Chambre extends Hebergement {
         }
     }
 
-
     @Override
     public String toString() {
         return getNumero() + " " + getType() + " " + " " + getCapacite() + "place(s) " + getPrix() + " euros [" + afficherDisponible(estDisponible) + "]";
-    }
-
-    public Object getId() {
-        return null;
     }
 }

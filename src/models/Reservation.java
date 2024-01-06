@@ -12,13 +12,16 @@ public class Reservation implements Serializable {
     private Date dateFin;
     private List<Repas> repas = new ArrayList<>();
     private int numero;
+    private int dureeSejour;
 
-    public Reservation(Client client, Chambre chambre, Date dateDebut, Date dateFin) {
+
+    public Reservation(Client client, Chambre chambre, Date dateDebut, Date dateFin, int dureeSejour){
         this.numero = nextReservationNumber++;
         this.client = client;
         this.chambre = chambre;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.dureeSejour = dureeSejour;
     }
 
     public Client getClient() {
@@ -51,16 +54,18 @@ public class Reservation implements Serializable {
     public void ajouterRepas(Repas repasChoisi) {
         this.repas.add(repasChoisi);
     }
+
+    public int getDuration() {
+        return this.dureeSejour;
+    }
     
 
     @Override
     public String toString() {
         return "Reservation | " +
-                "Numero=" + chambre.getNumero() +
-                " Client=" + client.getNom() + " " + client.getPrenom() +
-                ", Chambre=" + chambre.getType() +
-                ", Date début=" + dateDebut +
-                ", Date fin=" + dateFin +
+                "Numero : " + chambre.getNumero() +
+                " Client : " + client.getNom() + " " + client.getPrenom() +
+                ", Chambre : " + chambre.getType() + ", Durée : " + getDuration() +
                 '}';
     }
 }
