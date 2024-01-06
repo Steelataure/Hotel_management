@@ -94,21 +94,6 @@ public class GestionHotel {
     }
 
 
-    public void modifierReservation(Reservation ancienneReservation, Reservation nouvelleReservation, int dureeSejours){
-        if (reservations.contains(ancienneReservation)) {
-            annulerReservation(ancienneReservation);
-            try {
-                effectuerReservation(nouvelleReservation.getClient(), nouvelleReservation.getChambre(), dureeSejours);
-                System.out.println("La réservation a été modifiée avec succès.");
-            } catch (ReservationException e) {
-                System.out.println("Erreur lors de la modification de la réservation : " + e.getMessage());
-            }
-        } else {
-            System.out.println("La réservation à modifier n'a pas été trouvée.");
-        }
-    }
-    
-
     public void afficherRepasDisponibles() {
         if (repasDisponibles.isEmpty()) {
             System.out.println("Aucun repas disponible pour le moment.");
