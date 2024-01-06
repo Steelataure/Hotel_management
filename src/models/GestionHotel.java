@@ -94,11 +94,11 @@ public class GestionHotel {
     }
 
 
-    public void modifierReservation(Reservation ancienneReservation, Reservation nouvelleReservation) {
+    public void modifierReservation(Reservation ancienneReservation, Reservation nouvelleReservation, int dureeSejours){
         if (reservations.contains(ancienneReservation)) {
             annulerReservation(ancienneReservation);
             try {
-                effectuerReservation(nouvelleReservation.getClient(), nouvelleReservation.getChambre(), 1);
+                effectuerReservation(nouvelleReservation.getClient(), nouvelleReservation.getChambre(), dureeSejours);
                 System.out.println("La réservation a été modifiée avec succès.");
             } catch (ReservationException e) {
                 System.out.println("Erreur lors de la modification de la réservation : " + e.getMessage());

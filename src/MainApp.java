@@ -38,10 +38,8 @@ public class MainApp {
             String prenomClient;
             Client client;
             int dureeSejour;
-
             int choix;
             Scanner scanner = new Scanner(System.in);
-
 
             do {
                 Menu.afficherMenuPrincipal();
@@ -110,18 +108,21 @@ public class MainApp {
                             System.out.println("1. Changer la chambre");
                             System.out.println("2. Changer la durée de séjour");
                             int choixModification = scanner.nextInt();
-                                                
+                    
                             switch (choixModification) {
                                 case 1:
                                     System.out.print("Entrez le type de chambre (Luxe_Simple / Luxe_Double / Normal_Simple / Normal_Double) : ");
                                     String typeChambreModif = scanner.next().toLowerCase();
                                     Chambre chambreReserveeModif = gestionHotel.chercherChambreDisponible(typeChambreModif); 
-                                                    
+                    
                                     if (chambreReserveeModif != null) {
-                                    } else {
-                                        System.out.println("Aucune chambre disponible de ce type");
+                                        reservationModif.getChambre().setEstDisponible(true);
+                                        reservationModif.setChambre(chambreReserveeModif);
+                                        chambreReserveeModif.setEstDisponible(false);
+                                        System.out.println("Chambre modifiée avec succès !");
                                     }
                                     break;
+                            
                             }
                         } else {
                             System.out.println("Réservation non trouvée");
